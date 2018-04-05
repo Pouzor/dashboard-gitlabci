@@ -7,22 +7,21 @@
       <b-navbar-brand href="#">Dashboard GitLab</b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
-
-        <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-
-          <b-nav-item-dropdown right>
-            <!-- Using button-content slot -->
-            <template slot="button-content">
-              <em>Settings</em>
-            </template>
-            <b-dropdown-item href="#">Token</b-dropdown-item>
-            <b-dropdown-item href="#">Projects</b-dropdown-item>
-          </b-nav-item-dropdown>
+          <b-navbar-nav right>
+            <b-nav-item href="#" v-b-modal.modal-settings>Settings</b-nav-item>
+          </b-navbar-nav>
         </b-navbar-nav>
-
       </b-collapse>
     </b-navbar>
+
+    <b-modal id="modal-settings" title="Settings">
+      <div>
+        <b-form-input v-model="token"
+                      type="text"
+                      placeholder="Token"></b-form-input>
+      </div>
+    </b-modal>
   </header>
 </template>
 
