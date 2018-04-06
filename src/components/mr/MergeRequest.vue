@@ -1,6 +1,7 @@
 <template>
   <li>
-    {{ mergeRequest.name }}
+    {{ mergeRequest.title }} by {{ mergeRequest.author.username }}<br />
+      Up : {{mergeRequest.upvotes}} - Down : {{mergeRequest.downvotes}} - Com : {{mergeRequest.user_notes_count}}
   </li>
 </template>
 

@@ -22,6 +22,22 @@ store.getProjects = () => {
     });
 };
 
+store.getMergeRequest = () => {
+    return new Promise((resolve, reject) => {
+        axios.get(`${process.env.GITLAB_URL}/api/v4/merge_requests?state=opened&scope=all&private_token=${process.env.GITLAB_TOKEN}`)
+            .then(response => {
+                if (response.data) {
+                    return resolve(response.data);
+                }
+
+                return reject(new Error('Invalid response'));
+            })
+            .catch(error => {
+                return reject(error);
+            })
+    });
+};
+
 
 store.getPipeline = (id) => {
     return new Promise((resolve, reject) => {

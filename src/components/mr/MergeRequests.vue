@@ -26,9 +26,9 @@ export default {
     };
   },
   created() {
-    storeGitLab.getProjects()
-      .then(projects => {
-        this.mergeRequests = projects;
+    storeGitLab.getMergeRequest()
+      .then(mrs => {
+        this.mergeRequests = mrs;
       })
       .catch(error => {
         console.log(error.message);
