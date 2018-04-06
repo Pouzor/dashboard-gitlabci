@@ -23,6 +23,10 @@ export default {
       msg: 'Welcome to Your Vue.js App',
     };
   },
+  created() {
+    localStorage.setItem('YourItem', 'hello world');
+     localStorage.getItem('YourItem');
+  },
 };
 </script>
 

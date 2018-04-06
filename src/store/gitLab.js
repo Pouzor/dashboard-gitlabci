@@ -21,3 +21,35 @@ store.getProjects = () => {
       })
   });
 };
+
+store.searchProjects = term => {
+  return new Promise((resolve, reject) => {
+    axios.get(`https://gitlab.ftven.net/api/v4/projects?private_token=${process.env.GITLAB_TOKEN}&simple=true&order_by=name&sort=asc&search=${term}`)
+      .then(response => {
+        if (response.data) {
+          return resolve(response.data);
+        }
+
+        return reject(new Error('Invalid response'));
+      })
+      .catch(error => {
+        return reject(error);
+      })
+  });
+};
+
+store.getProject = id => {
+  return new Promise((resolve, reject) => {
+    axios.get(`https://gitlab.ftven.net/api/v4/projects/${id}?private_token=${process.env.GITLAB_TOKEN}`)
+      .then(response => {
+        if (response.data) {
+          return resolve(response.data);
+        }
+
+        return reject(new Error('Invalid response'));
+      })
+      .catch(error => {
+        return reject(error);
+      })
+  });
+};
