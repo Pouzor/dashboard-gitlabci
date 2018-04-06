@@ -7,7 +7,7 @@ ESLINT=./node_modules/.bin/eslint
 build: ## transpile the files from ES6 to JS
 	@echo " > Building for production"
 	@$(MAKE) -s clean
-	@export GITLAB_TOKEN=$(GITLAB_TOKEN) && \
+	@export GITLAB_TOKEN=$(GITLAB_TOKEN) && export GITLAB_URL=$(GITLAB_URL) && \
 		node build/build.js
 
 clean: ## clean artifacts
@@ -33,5 +33,5 @@ lint: ## lint the code
 
 start: ## start the web server
 	@echo " > Starting the project"
-	@export GITLAB_TOKEN=$(GITLAB_TOKEN) && \
+	@export GITLAB_TOKEN=$(GITLAB_TOKEN) && export GITLAB_URL=$(GITLAB_URL) && \
 		./node_modules/.bin/webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
