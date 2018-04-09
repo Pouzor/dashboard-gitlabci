@@ -23,8 +23,13 @@
       </b-row>
 
       <b-row>
-        <b-col sm="8">
-          <label for="search-term">Term:</label>
+        <b-col sm="12">
+          Favorite projects:
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col sm="9">
           <b-form-input v-model="searchTerm"
                         type="text"
                         placeholder="Term"
@@ -32,7 +37,7 @@
           >
           </b-form-input>
         </b-col>
-        <b-col sm="4">
+        <b-col sm="3">
           <b-button v-on:click="search">
             Search
           </b-button>
@@ -41,7 +46,7 @@
 
       <b-row>
         <b-col sm="12">
-          <label for="projects">Projects</label>
+          <label for="projects">Result (select favorite projects):</label>
           <b-form-select
             v-on:change="changeProjectSelect"
             :select-size="10"
@@ -56,9 +61,10 @@
 
       <b-row>
         <b-col sm="12">
-          <b-table striped hover :items="selectedProjects" :fields="fields">
+          <b-table small striped hover :items="selectedProjects" :fields="fields">
             <template slot="action" slot-scope="data">
               <b-button
+                size="sm"
                 v-on:click="deleteProject(data.item.id)"
                 variant="danger"
               >
