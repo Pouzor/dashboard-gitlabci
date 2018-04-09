@@ -111,8 +111,8 @@ export default {
     for (let i = 0; i < this.projectIds.length; i += 1) {
       storeGitLab.getProject(this.projectIds[i])
         .then((project) => {
-          this.projects[i] = project;
-          this.selectedProjects[i] = project;
+          this.projects.push(project);
+          this.selectedProjects.push(project);
         })
         .catch((error) => {
           console.log(error.message);
