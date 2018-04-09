@@ -15,7 +15,14 @@
       </b-collapse>
     </b-navbar>
 
-    <b-modal id="modal-settings" ref="modal" title="Settings" @ok="handleOk" @shown="clearFields" size="lg">
+    <b-modal
+      id="modal-settings"
+      ref="modal"
+      title="Settings"
+      @ok="handleOk"
+      @shown="clearFields"
+      size="lg"
+    >
       <form @submit.stop.prevent="handleSubmit">
         <b-row>
           <b-col sm="3">
@@ -67,7 +74,12 @@
           <b-col sm="12">
             <b-table striped hover :items="selectedProjects" :fields="fields">
               <template slot="action" slot-scope="data">
-                <b-button v-on:click="deleteProject(data.item.id)" variant="danger">Delete</b-button>
+                <b-button
+                  v-on:click="deleteProject(data.item.id)"
+                  variant="danger"
+                >
+                  Delete
+                </b-button>
               </template>
             </b-table>
           </b-col>
@@ -85,7 +97,7 @@ export default {
   data() {
     return {
       searchTerm: null,
-      fields: [ 'id', 'name', 'action' ],
+      fields: ['id', 'name', 'action'],
       selectedProjectIds: [],
       selectedProjects: [],
       projects: [],
@@ -98,11 +110,11 @@ export default {
 
     for (let i = 0; i < this.projectIds.length; i += 1) {
       storeGitLab.getProject(this.projectIds[i])
-        .then(project => {
+        .then((project) => {
           this.projects[i] = project;
           this.selectedProjects[i] = project;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.message);
         });
     }
@@ -130,17 +142,17 @@ export default {
     },
     search() {
       storeGitLab.searchProjects(this.searchTerm)
-        .then(projects => {
+        .then((projects) => {
           this.projects = projects;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.message);
         });
     },
-    clearFields () {
+    clearFields() {
       this.token = localStorage.getItem('gitlab-dashboard.token');
     },
-    handleOk (evt) {
+    handleOk(evt) {
       // Prevent modal from closing
       evt.preventDefault();
 
@@ -150,13 +162,13 @@ export default {
         this.handleSubmit();
       }
     },
-    handleSubmit () {
+    handleSubmit() {
       localStorage.setItem('gitlab-dashboard.token', this.token);
       localStorage.setItem('gitlab-dashboard.project-ids', JSON.stringify(this.projectIds));
 
       this.clearFields();
       this.$refs.modal.hide();
-    }
+    },
   },
 };
 </script>
