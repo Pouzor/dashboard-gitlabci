@@ -3,8 +3,8 @@
     <div :class="pipeline.status == 'success' ? 'card bg-success' : pipeline.status == 'failed' ? 'card bg-danger' : 'card'" style="width: 200px;float:left; margin-left: 10px; margin-bottom: 10px; height: 200px">
         <div class="card-header" style="font-size:14px"><b>{{project.name}}</b></div>
         <div class="card-body">
-            <h6 class="card-title">{{pipeline.user.username}}</h6>
-            <p class="card-text"></p>
+            <h6 class="card-title"><img :src="pipeline.user.avatar_url" style="width:30px"/> {{pipeline.user.username}}</h6>
+            <p class="card-text">Coverage : {{pipeline.coverage}}%</p>
 
         </div>
         <span class="badge badge-secondary">{{pipeline.ref}}</span>
