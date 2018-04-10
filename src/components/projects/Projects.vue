@@ -1,15 +1,12 @@
 <template>
     <div>
-        <b-container fluid>
-            <b-row class="text-center">
+
         <project
                 v-for="project in projects"
                 :key="project.id"
                 :project="project"
         >
         </project>
-            </b-row>
-        </b-container>
 
     </div>
 </template>

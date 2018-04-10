@@ -1,14 +1,14 @@
 <template>
 
+    <div :class="pipeline.status == 'success' ? 'card bg-success' : pipeline.status == 'failed' ? 'card bg-danger' : 'card'" style="width: 200px;float:left; margin-left: 10px; margin-bottom: 10px; height: 200px">
+        <div class="card-header" style="font-size:14px"><b>{{project.name}}</b></div>
+        <div class="card-body">
+            <h6 class="card-title">{{pipeline.user.username}}</h6>
+            <p class="card-text"></p>
 
-    <b-col cols="4">
-        <div  class="project_ci">
-            {{project.name}} <br />
-            {{status}}
         </div>
-
-    </b-col>
-
+        <span class="badge badge-secondary">{{pipeline.ref}}</span>
+    </div>
 
 </template>
 
@@ -26,7 +26,11 @@
         },
         data() {
             return {
-                status: ""
+                pipeline: {
+                    user: {username: ""},
+                    ref: "",
+                    status: ""
+                }
             }
         },
         methods: {
@@ -35,9 +39,9 @@
                 storeGitLab.getPipeline(this.project.id)
                     .then(pipeline => {
                         if (pipeline) {
-                            this.status = pipeline.status;
+                            this.pipeline = pipeline;
                         } else {
-                            this.status = "No Tests";
+                            this.pipeline.status = "No Tests";
                         }
                     })
                     .catch(error => {

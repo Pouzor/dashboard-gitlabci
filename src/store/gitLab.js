@@ -48,14 +48,21 @@ store.getPipeline = (id) => {
 
                     return resolve(null);
                 } else {
-                    console.log(response.data[0]);
 
-                    return resolve(response.data[0]);
+                    axios.get(`${process.env.GITLAB_URL}/api/v4/projects/${id}/pipelines/${response.data[0].id}?private_token=${process.env.GITLAB_TOKEN}`)
+                        .then(response2 => {
+
+                            return resolve(response2.data);
+                        })
+                        .catch(error => {
+
+                            return reject(error);
+                        });
                 }
-
             })
             .catch(error => {
                 return reject(error);
             })
     });
 };
+

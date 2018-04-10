@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Merge requests</h2>
-    <ul>
+    <ul class="list-group">
       <merge-request
         v-for="mergeRequest in mergeRequests"
         :key="mergeRequest.id"
