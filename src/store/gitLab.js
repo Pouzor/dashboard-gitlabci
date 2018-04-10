@@ -8,7 +8,7 @@ export default store;
 
 store.getProjects = () => {
     return new Promise((resolve, reject) => {
-        axios.get(`${process.env.GITLAB_URL}/api/v4/projects?private_token=${process.env.GITLAB_TOKEN}&simple=true&order_by=last_activity_at&sort=desc&membership=true`)
+        axios.get(`${process.env.GITLAB_URL}/api/v4/projects?private_token=${process.env.GITLAB_TOKEN}&simple=true&order_by=last_activity_at&sort=desc&membership=true&per_page=100`)
             .then(response => {
                 if (response.data) {
                     return resolve(response.data);
