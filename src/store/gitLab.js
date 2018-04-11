@@ -51,7 +51,5 @@ store.getPipeline = id => new Promise((resolve, reject) => {
 
       return resolve(response.data[0]);
     })
-    .catch((error) => {
-      return reject(error);
-    });
+    .catch(reject);
 });
