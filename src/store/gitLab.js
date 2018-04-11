@@ -7,7 +7,7 @@ const store = new EventEmitter();
 export default store;
 
 store.getProjects = () => new Promise((resolve, reject) => {
-  axios.get(`https://gitlab.ftven.net/api/v4/projects?private_token=${process.env.GITLAB_TOKEN}&simple=true&order_by=last_activity_at&sort=desc&membership=true`)
+  axios.get(`${process.env.GITLAB_URL}/api/v4/projects?private_token=${process.env.GITLAB_TOKEN}&simple=true&order_by=last_activity_at&sort=desc&membership=true`)
     .then((response) => {
       if (response.data) {
         return resolve(response.data);
@@ -19,7 +19,7 @@ store.getProjects = () => new Promise((resolve, reject) => {
 });
 
 store.searchProjects = term => new Promise((resolve, reject) => {
-  axios.get(`https://gitlab.ftven.net/api/v4/projects?private_token=${process.env.GITLAB_TOKEN}&simple=true&order_by=name&sort=asc&search=${term}`)
+  axios.get(`${process.env.GITLAB_URL}/api/v4/projects?private_token=${process.env.GITLAB_TOKEN}&simple=true&order_by=name&sort=asc&search=${term}`)
     .then((response) => {
       if (response.data) {
         return resolve(response.data);
@@ -31,7 +31,7 @@ store.searchProjects = term => new Promise((resolve, reject) => {
 });
 
 store.getProject = id => new Promise((resolve, reject) => {
-  axios.get(`https://gitlab.ftven.net/api/v4/projects/${id}?private_token=${process.env.GITLAB_TOKEN}`)
+  axios.get(`${process.env.GITLAB_URL}/api/v4/projects/${id}?private_token=${process.env.GITLAB_TOKEN}`)
     .then((response) => {
       if (response.data) {
         return resolve(response.data);
@@ -40,4 +40,18 @@ store.getProject = id => new Promise((resolve, reject) => {
       return reject(new Error('Invalid response'));
     })
     .catch(reject);
+});
+
+store.getPipeline = id => new Promise((resolve, reject) => {
+  axios.get(`${process.env.GITLAB_URL}/api/v4/projects/${id}/pipelines?private_token=${process.env.GITLAB_TOKEN}`)
+    .then((response) => {
+      if (response.data && response.data.length === 0) {
+        return resolve(null);
+      }
+
+      return resolve(response.data[0]);
+    })
+    .catch((error) => {
+      return reject(error);
+    });
 });
