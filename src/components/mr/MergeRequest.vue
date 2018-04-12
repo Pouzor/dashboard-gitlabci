@@ -1,6 +1,11 @@
 <template>
-  <li>
-    {{ mergeRequest.name }}
+  <li
+    :class="mergeRequest.upvotes > 0 ?
+    'list-group-item list-group-item-success' : 'list-group-item'"
+  >
+    {{ mergeRequest.title }} by <b>{{ mergeRequest.author.username }}</b><br/>
+    Up : {{mergeRequest.upvotes}} - Down : {{mergeRequest.downvotes}} - Com :
+    {{mergeRequest.user_notes_count}}
   </li>
 </template>
 

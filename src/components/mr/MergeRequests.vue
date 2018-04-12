@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Merge requests</h2>
-    <ul>
+    <ul class="list-group">
       <merge-request
         v-for="mergeRequest in mergeRequests"
         :key="mergeRequest.id"
@@ -26,9 +26,9 @@ export default {
     };
   },
   created() {
-    storeGitLab.getProjects()
-      .then((projects) => {
-        this.mergeRequests = projects;
+    storeGitLab.getMergeRequest()
+      .then((mrs) => {
+        this.mergeRequests = mrs;
       })
       .catch((error) => {
         console.log(error.message);
