@@ -5,6 +5,7 @@
       <projects></projects>
     </div>
     <div class="col-4">
+      <h2>Merge Requests</h2>
       <merge-requests></merge-requests>
     </div>
   </div>

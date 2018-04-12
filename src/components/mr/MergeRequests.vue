@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h2>Merge requests</h2>
     <ul class="list-group">
       <merge-request
         v-for="mergeRequest in mergeRequests"
