@@ -30,7 +30,7 @@ export default {
       .then(mrs => {
         this.mergeRequests = mrs;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
       });
   },

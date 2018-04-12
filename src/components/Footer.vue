@@ -6,7 +6,7 @@
 
       <b-collapse is-nav id="nav_text_collapse">
         <b-navbar-nav>
-          <b-nav-text>Made with <3</b-nav-text>
+          <b-nav-text>Hello world!</b-nav-text>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -21,7 +21,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-footer {
-  background-color: red;
-}
 </style>

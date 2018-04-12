@@ -13,16 +13,16 @@
 </template>
 
 <script>
-    import MergeRequests from './mr/MergeRequests';
-    import Projects from './projects/Projects';
+import MergeRequests from './mr/MergeRequests';
+import Projects from './projects/Projects';
 
-    export default {
-        name: 'Body',
-        components: {
-            MergeRequests,
-            Projects
-        },
-    };
+export default {
+  name: 'Body',
+  components: {
+    MergeRequests,
+    Projects,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

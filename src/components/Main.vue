@@ -9,7 +9,7 @@
 <script>
 import Body from './Body';
 import Footer from './Footer';
-import Header from './Header';
+import Header from './header/Header';
 
 export default {
   name: 'Main',
@@ -17,11 +17,6 @@ export default {
     dBody: Body,
     dFooter: Footer,
     dHeader: Header,
-  },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-    };
   },
 };
 </script>
