@@ -27,7 +27,7 @@ export default {
   },
   created() {
     storeGitLab.getMergeRequest()
-      .then(mrs => {
+      .then((mrs) => {
         this.mergeRequests = mrs;
       })
       .catch((error) => {
