@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Homepage from '@/components/Homepage';
-import ContinuousIntegration from '@/components/ci/ContinuousIntegration';
+import ContinuousIntegration from '@/components/ci/CIIndex';
+import MergeRequest from '@/components/mr/MRIndex';
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/continuous-integration',
       name: 'ContinuousIntegration',
       component: ContinuousIntegration,
+    },
+    {
+      path: '/merge-request',
+      name: 'MergeRequest',
+      component: MergeRequest,
     },
   ],
 });

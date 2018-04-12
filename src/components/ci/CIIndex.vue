@@ -11,7 +11,7 @@
 import Projects from './../projects/Projects';
 
 export default {
-  name: 'ContinuousIntegration',
+  name: 'CIIndex',
   components: {
     Projects,
   },
