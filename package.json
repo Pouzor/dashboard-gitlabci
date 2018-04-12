@@ -18,7 +18,6 @@
     "bootstrap-vue": "^2.0.0-rc.6",
     "promise": "^8.0.1",
     "vue": "^2.5.2",
-    "vue-material": "^1.0.0-beta-7",
     "vue-resource": "^1.5.0",
     "vue-router": "^3.0.1"
   },

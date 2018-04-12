@@ -27,10 +27,10 @@ export default {
   },
   created() {
     storeGitLab.getProjects()
-      .then(projects => {
+      .then((projects) => {
         this.mergeRequests = projects;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
       });
   },
