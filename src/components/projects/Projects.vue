@@ -15,7 +15,7 @@
 
 <script>
 import Project from './Project';
-import storeGitLab from './../../store/gitLab';
+import storeLocal from './../../store/local';
 
 export default {
   name: 'projects',
@@ -28,13 +28,11 @@ export default {
     Project,
   },
   created() {
-    storeGitLab.getProjects()
+    storeLocal.getFavoriteProjects()
       .then((projects) => {
         this.projects = projects;
       })
-      .catch((error) => {
-        console.log(error.message);
-      });
+      .catch(error => console.log(error));
   },
 };
 </script>

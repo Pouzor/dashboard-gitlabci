@@ -15,7 +15,7 @@ store.getMergeRequest = () => new Promise((resolve, reject) => {
 
       return reject(new Error('Invalid response'));
     })
-    .catch(reject);
+    .catch(error => reject(error));
 });
 
 store.getPipeline = id => new Promise((resolve, reject) => {
