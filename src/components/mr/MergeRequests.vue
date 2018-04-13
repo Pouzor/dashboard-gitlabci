@@ -1,12 +1,18 @@
 <template>
   <section>
-    <ul class="list-group">
-      <merge-request
-        v-for="mergeRequest in mergeRequests"
-        :key="mergeRequest.id"
-        :mergeRequest="mergeRequest">
-      </merge-request>
-    </ul>
+
+    <table class="table table-hover table-outline table-vcenter text-nowrap">
+      <tbody>
+
+        <merge-request
+            v-for="mergeRequest in mergeRequests"
+            :key="mergeRequest.id"
+            :mergeRequest="mergeRequest">
+        </merge-request>
+
+      </tbody>
+    </table>
+
   </section>
 </template>
 
