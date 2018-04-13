@@ -11,12 +11,22 @@
 <script>
 import Footer from './components/Footer';
 import Header from './components/header/Header';
+import storeLocal from './store/local';
 
 export default {
   name: 'Main',
   components: {
     dFooter: Footer,
     dHeader: Header,
+  },
+  created() {
+    storeLocal.getFavoriteProjects()
+      .then((projects) => {
+        console.log('set fav proj');
+        this.$root.$data.favoriteProjects = projects;
+        this.$root.$emit('helloWorld');
+      })
+      .catch(error => console.log(error));
   },
 };
 </script>

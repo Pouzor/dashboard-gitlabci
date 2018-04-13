@@ -2,7 +2,7 @@
 
   <div>
       <project
-          v-for="project in projects"
+          v-for="project in $root.$data.favoriteProjects"
           :key="project.id"
           :project="project"
       >
@@ -15,7 +15,7 @@
 
 <script>
 import Project from './Project';
-import storeLocal from './../../store/local';
+// import storeLocal from './../../store/local';
 
 export default {
   name: 'projects',
@@ -28,11 +28,17 @@ export default {
     Project,
   },
   created() {
-    storeLocal.getFavoriteProjects()
+    console.log('created projects');
+    /* storeLocal.getFavoriteProjects()
       .then((projects) => {
         this.projects = projects;
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error)); */
+  },
+  methods: {
+    helloWorld() {
+      console.log('hello world');
+    },
   },
 };
 </script>
