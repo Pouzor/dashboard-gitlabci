@@ -11,7 +11,6 @@
 <script>
 import Footer from './components/Footer';
 import Header from './components/header/Header';
-import storeLocal from './store/local';
 
 export default {
   name: 'Main',
@@ -20,13 +19,10 @@ export default {
     dHeader: Header,
   },
   created() {
-    storeLocal.getFavoriteProjects()
-      .then((projects) => {
-        console.log('set fav proj');
-        this.$root.$data.favoriteProjects = projects;
-        this.$root.$emit('helloWorld');
-      })
-      .catch(error => console.log(error));
+    console.log('created app');
+    this.$store.commit('init');
+    this.$emit('testToto', 'totototototo');
+    console.log('/created app');
   },
 };
 </script>

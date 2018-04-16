@@ -79,8 +79,8 @@
 </template>
 
 <script>
-import storeLocal from './../../store/local';
 import storeGitLab from './../../store/gitLab';
+import eventBus from '../../eventBus';
 
 export default {
   name: 'Settings',
@@ -96,19 +96,22 @@ export default {
     };
   },
   created() {
-    // this.projectIds = localStorage.getItem('gitlab-dashboard.project-ids')
-    // !== null ? JSON.parse(localStorage.getItem('gitlab-dashboard.project-ids')) : [];
-    this.projectIds = storeLocal.getFavoriteProjectIds();
-    this.selectedProjects = this.$root.$data.favoriteProjects;
-    /* for (let i = 0; i < this.projectIds.length; i += 1) {
-      storeGitLab.getProject(this.projectIds[i])
-        .then((project) => {
-          this.selectedProjects.push(project);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    } */
+    eventBus.$on('projectsOk', (projects) => {
+      console.log('porjects ok');
+      this.selectedProjects = projects;
+    });
+
+    console.log('created settings');
+    this.projectIds = localStorage.getItem('gitlab-dashboard.project-ids') !== null ? JSON.parse(localStorage.getItem('gitlab-dashboard.project-ids')) : [];
+    console.log(this.projectIds);
+    this.selectedProjects = this.$store.getters.favoriteProjects;
+    console.log(this.selectedProjects);
+    console.log('/created settings');
+  },
+  events: {
+    testToto() {
+      console.log('testToto in Settings');
+    },
   },
   methods: {
     deleteProject(id) {
@@ -125,6 +128,12 @@ export default {
       }
     },
     changeProjectSelect(projectId) {
+      console.log('this.projectIds');
+      console.log(this.projectIds);
+      console.log('this.selectedProjects');
+      console.log(this.selectedProjects);
+      console.log('this.projects');
+      console.log(this.projects);
       for (let i = 0; i < this.projects.length; i += 1) {
         if (this.projects[i].id === projectId) {
           if (this.projectIds.indexOf(projectId) === -1 || this.projectIds.length === 0) {
@@ -146,7 +155,7 @@ export default {
         });
     },
     clearFields() {
-      this.token = storeLocal.getToken();
+      this.token = localStorage.getItem('gitlab-dashboard.token');
     },
     handleOk(evt) {
       // Prevent modal from closing
@@ -159,10 +168,10 @@ export default {
       }
     },
     handleSubmit() {
-      storeLocal.setToken(this.token);
-      storeLocal.setFavoriteProjects(this.projectIds, this.selectedProjects);
-      // localStorage.setItem('gitlab-dashboard.token', this.token);
-      // localStorage.setItem('gitlab-dashboard.project-ids', JSON.stringify(this.projectIds));
+      localStorage.setItem('gitlab-dashboard.token', this.token);
+      localStorage.setItem('gitlab-dashboard.project-ids', JSON.stringify(this.projectIds));
+
+      this.$store.commit('set', this.selectedProjects);
 
       this.clearFields();
       this.$refs.modal.hide();

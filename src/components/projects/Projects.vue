@@ -15,7 +15,6 @@
 
 <script>
 import Project from './Project';
-// import storeLocal from './../../store/local';
 
 export default {
   name: 'projects',
@@ -28,17 +27,6 @@ export default {
     Project,
   },
   created() {
-    console.log('created projects');
-    /* storeLocal.getFavoriteProjects()
-      .then((projects) => {
-        this.projects = projects;
-      })
-      .catch(error => console.log(error)); */
-  },
-  methods: {
-    helloWorld() {
-      console.log('hello world');
-    },
   },
 };
 </script>
