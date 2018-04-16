@@ -96,22 +96,12 @@ export default {
     };
   },
   created() {
-    eventBus.$on('projectsOk', (projects) => {
-      console.log('porjects ok');
+    eventBus.$on('favoriteProjects', (projects) => {
       this.selectedProjects = projects;
     });
 
-    console.log('created settings');
     this.projectIds = localStorage.getItem('gitlab-dashboard.project-ids') !== null ? JSON.parse(localStorage.getItem('gitlab-dashboard.project-ids')) : [];
-    console.log(this.projectIds);
     this.selectedProjects = this.$store.getters.favoriteProjects;
-    console.log(this.selectedProjects);
-    console.log('/created settings');
-  },
-  events: {
-    testToto() {
-      console.log('testToto in Settings');
-    },
   },
   methods: {
     deleteProject(id) {
@@ -128,12 +118,6 @@ export default {
       }
     },
     changeProjectSelect(projectId) {
-      console.log('this.projectIds');
-      console.log(this.projectIds);
-      console.log('this.selectedProjects');
-      console.log(this.selectedProjects);
-      console.log('this.projects');
-      console.log(this.projects);
       for (let i = 0; i < this.projects.length; i += 1) {
         if (this.projects[i].id === projectId) {
           if (this.projectIds.indexOf(projectId) === -1 || this.projectIds.length === 0) {

@@ -19,10 +19,7 @@ export default {
     dHeader: Header,
   },
   created() {
-    console.log('created app');
     this.$store.commit('init');
-    this.$emit('testToto', 'totototototo');
-    console.log('/created app');
   },
 };
 </script>
