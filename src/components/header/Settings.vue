@@ -80,6 +80,7 @@
 
 <script>
 import storeGitLab from './../../store/gitLab';
+import eventBus from '../../eventBus';
 
 export default {
   name: 'Settings',
@@ -95,17 +96,12 @@ export default {
     };
   },
   created() {
-    this.projectIds = localStorage.getItem('gitlab-dashboard.project-ids') !== null ? JSON.parse(localStorage.getItem('gitlab-dashboard.project-ids')) : [];
+    eventBus.$on('favoriteProjects', (projects) => {
+      this.selectedProjects = projects;
+    });
 
-    for (let i = 0; i < this.projectIds.length; i += 1) {
-      storeGitLab.getProject(this.projectIds[i])
-        .then((project) => {
-          this.selectedProjects.push(project);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    }
+    this.projectIds = localStorage.getItem('gitlab-dashboard.project-ids') !== null ? JSON.parse(localStorage.getItem('gitlab-dashboard.project-ids')) : [];
+    this.selectedProjects = this.$store.getters.favoriteProjects;
   },
   methods: {
     deleteProject(id) {
@@ -158,6 +154,8 @@ export default {
     handleSubmit() {
       localStorage.setItem('gitlab-dashboard.token', this.token);
       localStorage.setItem('gitlab-dashboard.project-ids', JSON.stringify(this.projectIds));
+
+      this.$store.commit('set', this.selectedProjects);
 
       this.clearFields();
       this.$refs.modal.hide();

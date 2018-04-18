@@ -18,6 +18,9 @@ export default {
     dFooter: Footer,
     dHeader: Header,
   },
+  created() {
+    this.$store.commit('init');
+  },
 };
 </script>
 

@@ -2,18 +2,18 @@
   <div class="row">
     <div class="col-12">
       <h2>Continuous Integration</h2>
-      <projects></projects>
+      <pipelines></pipelines>
     </div>
   </div>
 </template>
 
 <script>
-import Projects from './../projects/Projects';
+import Pipelines from './/Pipelines';
 
 export default {
   name: 'CIIndex',
   components: {
-    Projects,
+    Pipelines,
   },
 };
 </script>

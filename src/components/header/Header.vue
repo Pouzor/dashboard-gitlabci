@@ -51,9 +51,6 @@ export default {
       activeItem: this.$route.path,
     };
   },
-  created() {
-    console.log(this.$route.path);
-  },
   methods: {
     isActive(menuItem) {
       return this.activeItem === menuItem;

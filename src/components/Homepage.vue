@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-8">
       <h2>CI</h2>
-      <projects></projects>
+      <pipelines></pipelines>
     </div>
     <div class="col-4">
       <h2>Merge Requests</h2>
@@ -13,13 +13,13 @@
 
 <script>
 import MergeRequests from './mr/MergeRequests';
-import Projects from './projects/Projects';
+import Pipelines from './pipeline/Pipelines';
 
 export default {
   name: 'Homepage',
   components: {
     MergeRequests,
-    Projects,
+    Pipelines,
   },
 };
 </script>
