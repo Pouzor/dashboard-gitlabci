@@ -1,5 +1,48 @@
 <template>
-  <div
+  <div class="col col-lg-4">
+    <div class="row">
+      <div class="col-lg-12">
+        {{ project.path_with_namespace }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        by <strong>{{ pipeline.user.username }}</strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">#{{ pipeline.id }}</div>
+      <div class="col-lg-6">{{ pipeline.finished_at }}</div>
+    </div>
+    <!--<b-card bg-variant="primary"
+            text-variant="white"
+            :header="project.path_with_namespace"
+            class="text-center"
+            >
+      <div class="card-text text-left">
+        <strong>{{ pipeline.user.username }}</strong>
+        <b-progress
+          height="2rem"
+          :value="pipeline.coverage"
+          max="100"
+          striped="striped"
+          show-progress
+          class="mb-2">
+        </b-progress>
+      </div>
+      <div slot="footer">
+        <div class="row">
+          <div class="col-lg-6 text-left">
+            <small class="">#{{ pipeline.id }}</small>
+          </div>
+          <div class="col-lg-6 text-right ">
+            <small class="">{{ pipeline.finished_at }}</small>
+          </div>
+        </div>
+      </div>
+    </b-card>-->
+  </div>
+  <!--<div
     :class="pipeline.status == 'success' ?
     'card bg-success' : pipeline.status == 'failed' ? 'card bg-danger' : 'card'"
        style="width: 200px;float:left; margin-left: 10px; margin-bottom: 10px; height: 200px">
@@ -12,7 +55,7 @@
         <p class="card-text">Coverage : {{pipeline.coverage}}%</p>
       </div>
       <span class="badge badge-secondary">{{pipeline.ref}}</span>
-  </div>
+  </div>-->
 </template>
 
 <script>
@@ -40,6 +83,10 @@ export default {
       storeGitLab.getPipeline(this.project.id)
         .then((pipeline) => {
           if (pipeline) {
+            console.log('=======PIPELINE');
+            console.log(this.project);
+            console.log(pipeline);
+            console.log('/=======PIPELINE');
             this.pipeline = pipeline;
           } else {
             this.pipeline.status = 'No Test';

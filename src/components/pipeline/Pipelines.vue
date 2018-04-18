@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="row">
     <pipeline
       v-for="project in projects"
       :key="project.id"
       :project="project"
     >
     </pipeline>
-  </div>
+    </div>
 </template>
 
 <script>
