@@ -5,6 +5,12 @@ import eventBus from '../eventBus';
 
 Vue.use(Vuex);
 
+const dispatchFavoriteProjects = (projects) => {
+  eventBus.$emit('favoriteProjects', projects);
+
+  setTimeout(() => dispatchFavoriteProjects(projects), 60000);
+};
+
 const store = new Vuex.Store({
   state: {
     favoriteProjects: [],
@@ -24,7 +30,8 @@ const store = new Vuex.Store({
       }
 
       state.favoriteProjects = projects;
-      eventBus.$emit('favoriteProjects', projects);
+
+      dispatchFavoriteProjects(projects);
     },
     set: (state, projects) => { // this.$store.commit('set', projects)
       state.favoriteProjects = projects;
