@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Homepage from '@/components/Homepage';
-import ContinuousIntegration from '@/components/ci/CIIndex';
+import ContinuousIntegration from '@/components/pipeline/PipelineIndex';
 import MergeRequest from '@/components/mr/MRIndex';
 
 Vue.use(Router);

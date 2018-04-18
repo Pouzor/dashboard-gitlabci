@@ -1,28 +1,27 @@
 <template>
-
   <div>
-      <project
-          v-for="project in projects"
-          :key="project.id"
-          :project="project"
-      >
-      </project>
+    <pipeline
+      v-for="project in projects"
+      :key="project.id"
+      :project="project"
+    >
+    </pipeline>
   </div>
 </template>
 
 <script>
-import Project from './Project';
+import Pipeline from './Pipeline';
 import eventBus from '../../eventBus';
 
 export default {
-  name: 'projects',
+  name: 'Pipelines',
   data() {
     return {
       projects: [],
     };
   },
   components: {
-    Project,
+    Pipeline,
   },
   created() {
     eventBus.$on('favoriteProjects', (projects) => {

@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import storeGitLab from './../../store/gitLab';
+import storeGitLab from '../../store/gitLab';
 
 export default {
-  name: 'project',
+  name: 'Pipeline',
   props: {
     project: Object,
   },
