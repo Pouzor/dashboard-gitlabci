@@ -7,12 +7,12 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        by <strong>{{ pipeline.user.username }}</strong>
+        by <strong v-if="pipeline.user !== null">{{ pipeline.user.username }}</strong>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-6">#{{ pipeline.id }}</div>
-      <div class="col-lg-6">{{ pipeline.finished_at }}</div>
+      <div class="col-lg-6">{{ pipeline.finished_at | dateFromNow }}</div>
     </div>
     <!--<b-card bg-variant="primary"
             text-variant="white"
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import storeGitLab from '../../store/gitLab';
 
 export default {
@@ -88,6 +89,7 @@ export default {
             console.log(pipeline);
             console.log('/=======PIPELINE');
             this.pipeline = pipeline;
+            // this.pipeline.finishedt_at_from = momentjs().format(pipeline.finished_at).fromNow();
           } else {
             this.pipeline.status = 'No Test';
           }
@@ -96,6 +98,9 @@ export default {
           console.log(error.message);
         });
     },
+  },
+  filters: {
+    dateFromNow: date => moment(date, 'YYYY-MM-DDTHH:mm:ss.SSSZZ').fromNow(),
   },
 };
 </script>
