@@ -10,7 +10,7 @@ export default store;
 store.getMergeRequest = () => new Promise((resolve) => {
   eventBus.$on('favoriteProjects', (projects) => {
     const calls = [];
-    projects.forEach(function (project) {
+    projects.forEach((project) => {
       calls.push(axios.get(`${process.env.GITLAB_URL}/api/v4/projects/${project.id}/merge_requests?state=opened&private_token=${process.env.GITLAB_TOKEN}`));
     });
 
@@ -18,8 +18,8 @@ store.getMergeRequest = () => new Promise((resolve) => {
       .then(
         axios.spread((...responses) => {
           const mrs = [];
-          responses.forEach(function (project) {
-            project.data.forEach(function (mr) {
+          responses.forEach((project) => {
+            project.data.forEach((mr) => {
               mrs.push(mr);
             });
           });
