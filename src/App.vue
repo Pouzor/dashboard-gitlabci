@@ -19,11 +19,16 @@ export default {
     dHeader: Header,
   },
   created() {
-    let recaptchaScript = document.createElement('script');
-    recaptchaScript.setAttribute('src', 'https://buttons.github.io/buttons.js');
-    document.head.appendChild(recaptchaScript);
-
+    this.setGithubStarButton();
     this.$store.commit('init');
+  },
+  methods: {
+    setGithubStarButton() {
+      const githubStarButton = document.createElement('script');
+
+      githubStarButton.setAttribute('src', 'https://buttons.github.io/buttons.js');
+      document.head.appendChild(githubStarButton);
+    },
   },
 };
 </script>
