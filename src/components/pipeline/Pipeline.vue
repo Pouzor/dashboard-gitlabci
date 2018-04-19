@@ -68,7 +68,6 @@ export default {
     fetchData() {
       storeGitLab.getPipeline(this.project.id)
         .then((pipeline) => {
-          console.log(pipeline);
           if (pipeline !== null) {
             this.pipeline = pipeline;
           }
