@@ -1,61 +1,45 @@
 <template>
-  <div class="col col-lg-4">
-    <div class="row">
-      <div class="col-lg-12">
-        {{ project.path_with_namespace }}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        by <strong v-if="pipeline.user !== null">{{ pipeline.user.username }}</strong>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6">#{{ pipeline.id }}</div>
-      <div class="col-lg-6">{{ pipeline.finished_at | dateFromNow }}</div>
-    </div>
-    <!--<b-card bg-variant="primary"
-            text-variant="white"
-            :header="project.path_with_namespace"
-            class="text-center"
-            >
-      <div class="card-text text-left">
-        <strong>{{ pipeline.user.username }}</strong>
-        <b-progress
-          height="2rem"
-          :value="pipeline.coverage"
-          max="100"
-          striped="striped"
-          show-progress
-          class="mb-2">
-        </b-progress>
-      </div>
-      <div slot="footer">
-        <div class="row">
-          <div class="col-lg-6 text-left">
-            <small class="">#{{ pipeline.id }}</small>
-          </div>
-          <div class="col-lg-6 text-right ">
-            <small class="">{{ pipeline.finished_at }}</small>
-          </div>
+  <div class="col col-lg-4 pipeline">
+    <div
+      class="alert"
+      v-bind:class="{
+      'alert-success': pipeline.status === 'success',
+      'alert-danger': pipeline.status === 'failed' || pipeline.status === null,
+      'alert-primary': pipeline.status === 'running',
+      'alert-warning': pipeline.status === 'canceled' || pipeline.status === 'skipped',
+      'alert-secondary': pipeline.status === 'pending'
+    }"
+      role="alert"
+    >
+      <div class="row project-name">
+        <div class="col-lg-12 text-center">
+          <h5 class="alert-heading"><strong>{{ project.path_with_namespace }}</strong></h5>
         </div>
       </div>
-    </b-card>-->
-  </div>
-  <!--<div
-    :class="pipeline.status == 'success' ?
-    'card bg-success' : pipeline.status == 'failed' ? 'card bg-danger' : 'card'"
-       style="width: 200px;float:left; margin-left: 10px; margin-bottom: 10px; height: 200px">
-      <div class="card-header" style="font-size:14px"><b>{{project.name}}</b></div>
-      <div class="card-body">
-        <h6 class="card-title">
-          <img :src="pipeline.user ? pipeline.user.avatar_url : null" style="width:30px"/>
-          {{ pipeline.user ? pipeline.user.username : null }}
-        </h6>
-        <p class="card-text">Coverage : {{pipeline.coverage}}%</p>
+      <div class="row">
+        <div class="col-lg-8">
+          by <strong v-if="pipeline.user !== null">{{ pipeline.user.username }}</strong>
+        </div>
+        <div class="col-lg-4 text-right">
+          <span
+            class="badge badge-pill"
+            v-bind:class="{
+              'badge-danger': pipeline.coverage === null || pipeline.coverage < 50,
+              'badge-warning': pipeline.coverage < 75,
+              'badge-success': pipeline.coverage >= 75
+            }"
+          >
+            {{ pipeline.coverage }}%
+          </span>
+        </div>
       </div>
-      <span class="badge badge-secondary">{{pipeline.ref}}</span>
-  </div>-->
+      <hr>
+      <div class="row mb-0">
+        <div class="col-lg-4 mb-0">#<strong>{{ pipeline.id }}</strong></div>
+        <div class="col-lg-8 mb-0 text-right">{{ pipeline.finished_at | dateFromNow }}</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -73,9 +57,10 @@ export default {
   data() {
     return {
       pipeline: {
-        user: { username: '' },
-        ref: '',
-        status: '',
+        user: {
+          username: null,
+        },
+        status: null,
       },
     };
   },
@@ -83,15 +68,9 @@ export default {
     fetchData() {
       storeGitLab.getPipeline(this.project.id)
         .then((pipeline) => {
-          if (pipeline) {
-            console.log('=======PIPELINE');
-            console.log(this.project);
-            console.log(pipeline);
-            console.log('/=======PIPELINE');
+          console.log(pipeline);
+          if (pipeline !== null) {
             this.pipeline = pipeline;
-            // this.pipeline.finishedt_at_from = momentjs().format(pipeline.finished_at).fromNow();
-          } else {
-            this.pipeline.status = 'No Test';
           }
         })
         .catch((error) => {
@@ -100,15 +79,28 @@ export default {
     },
   },
   filters: {
-    dateFromNow: date => moment(date, 'YYYY-MM-DDTHH:mm:ss.SSSZZ').fromNow(),
+    dateFromNow: date => (!date ? '-' : moment(date, 'YYYY-MM-DDTHH:mm:ss.SSSZZ').fromNow()),
   },
 };
 </script>
 
 <style>
-.project_ci {
+.pipeline {
+  padding-left: 6px;
+  padding-right: 6px;
+  min-height: 200px;
+}
+
+.alert {
+  height: 180px;
+}
+
+.project-name {
   height: 100px;
-  border: 1px solid #eee;
-  margin-top: 10px;
+}
+
+hr {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 </style>

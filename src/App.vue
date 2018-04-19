@@ -1,7 +1,7 @@
 <template>
   <div>
     <d-header></d-header>
-    <div class="container">
+    <div class="container-fluid">
       <router-view></router-view>
     </div>
     <d-footer></d-footer>
