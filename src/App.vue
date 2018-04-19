@@ -19,6 +19,10 @@ export default {
     dHeader: Header,
   },
   created() {
+    let recaptchaScript = document.createElement('script');
+    recaptchaScript.setAttribute('src', 'https://buttons.github.io/buttons.js');
+    document.head.appendChild(recaptchaScript);
+
     this.$store.commit('init');
   },
 };

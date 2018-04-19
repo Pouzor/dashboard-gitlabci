@@ -6,7 +6,16 @@
 
       <b-collapse is-nav id="nav_text_collapse">
         <b-navbar-nav>
-          <b-nav-text>Hello world!</b-nav-text>
+          <b-nav-text>
+            <a
+              class="github-button"
+              href="https://github.com/Pouzor/dashboard-gitlabci"
+              data-show-count="true"
+              aria-label="Star Pouzor/dashboard-gitlabci on GitHub"
+            >
+              Star
+            </a>
+          </b-nav-text>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
